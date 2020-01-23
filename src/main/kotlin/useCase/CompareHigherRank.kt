@@ -5,11 +5,11 @@ import domain.Hand
 import domain.PokerType
 
 class CompareHigherRank() {
-    fun execute(firstHand: List<String>, secondHand: List<String>): String {
+    fun execute(firstHand: List<Card>, secondHand: List<Card>): Int {
         return calculateResult(Hand(firstHand), Hand(secondHand))
     }
 
-    private fun calculateResult(firstHand: Hand, secondHand: Hand): String {
+    private fun calculateResult(firstHand: Hand, secondHand: Hand): Int {
 //        if (firstHand.type === PokerType.HIGH_CARD && secondHand.type === PokerType.HIGH_CARD) {
 //            val highCardForFistHand = firstHand.getHighCard()
 //            val highCardForSecondHand = secondHand.getHighCard()
@@ -18,10 +18,11 @@ class CompareHigherRank() {
 //            }
 //            return compareCard(highCardForFistHand, highCardForSecondHand)
 //        }
+        if (firstHand.rank == secondHand.rank) return 0
         return if (firstHand.rank > secondHand.rank) {
-            "First wins. - with " + firstHand.rank
+            1
         } else {
-            "Second wins. - with " + firstHand.rank
+            -1
         }
 
     }

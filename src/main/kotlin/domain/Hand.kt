@@ -3,8 +3,7 @@ package domain
 enum class PokerType {
     POKER, HIGH_CARD, NONE
 }
-class Hand( hand: List<String>) {
-    var cards: List<Card> = hand.map { Card(it[0], it[1]) }
+class Hand( val cards: List<Card> ) {
     var rank: Rank = HighCard(this)
 
     init {
