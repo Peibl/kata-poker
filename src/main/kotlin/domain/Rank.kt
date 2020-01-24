@@ -68,6 +68,33 @@ class Quad(private val cards: List<Card>) : Rank() {
     }
 }
 
+class Full(private val cards: List<Card>) : Rank() {
+    override val score: Int
+        get() = 4
+    override val tieScore: Int
+        get() = 0
+
+    companion object {
+        fun check(cards: List<Card>): Boolean {
+            val map = cards.groupingBy { it.value }.eachCount()
+            return map.values.contains(3) && map.values.contains(2)
+        }
+    }
+}
+
+class Flush(private val cards: List<Card>) : Rank() {
+    override val score: Int
+        get() = 5
+    override val tieScore: Int
+        get() = cards.sortedByDescending { it.weighing }[0].weighing
+
+    companion object {
+        fun check(cards: List<Card>): Boolean {
+            return cards.groupingBy { it.suit }.eachCount().values.contains(5)
+        }
+    }
+}
+
 class HighCard(val cards: List<Card>) : Rank() {
     override val score: Int
         get() = 10

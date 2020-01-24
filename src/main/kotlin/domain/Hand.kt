@@ -1,6 +1,6 @@
 package domain
 
-class Hand(private val cards: List<Card> ) {
+class Hand(cards: List<Card> ) {
     private var rank: Rank = HighCard(cards)
 
     init {
@@ -8,6 +8,8 @@ class Hand(private val cards: List<Card> ) {
             RoyalFlush.check(cards) -> rank = RoyalFlush(cards)
             StraightFlush.check(cards) -> rank = StraightFlush(cards)
             Quad.check(cards) -> rank = Quad(cards)
+            Full.check(cards) -> rank = Full(cards)
+            Flush.check(cards) -> rank = Flush(cards)
             else -> rank = HighCard(cards)
         }
     }
