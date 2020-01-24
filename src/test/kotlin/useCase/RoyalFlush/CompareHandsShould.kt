@@ -30,6 +30,7 @@ class CompareHandsShould {
         assertThat(result).isEqualTo(0)
     }
 
+
 //    @Test
 //    fun `return that the second wins by poker`() {
 //        val firstHand = mutableListOf("2C", "3H", "4S", "9h", "QH").map { Card(it[0], it[1]) }
