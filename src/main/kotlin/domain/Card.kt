@@ -1,14 +1,14 @@
 package domain
 
-class Card(val value: Char, val symbol: Char) {
+class Card(val value: Char, val suit: Char) {
     var weighing: Int = 0
         get() {
             val cardValue = value
-            if (cardValue == 'A') return 80
-            if (cardValue == 'K') return 60
-            if (cardValue == 'Q') return 40
-            if (cardValue == 'J') return 20
-            if (cardValue == 'T') return 15
+            if (cardValue == 'A') return 14
+            if (cardValue == 'K') return 13
+            if (cardValue == 'Q') return 12
+            if (cardValue == 'J') return 11
+            if (cardValue == 'T') return 10
             return cardValue.toString().toInt(10)
         }
 
@@ -19,19 +19,19 @@ class Card(val value: Char, val symbol: Char) {
         other as Card
 
         if (value != other.value) return false
-        if (symbol != other.symbol) return false
+        if (suit != other.suit) return false
 
         return true
     }
 
     override fun hashCode(): Int {
         var result = value.hashCode()
-        result = 31 * result + symbol.hashCode()
+        result = 31 * result + suit.hashCode()
         return result
     }
 
     override fun toString(): String {
-        return "$value$symbol"
+        return "$value$suit"
     }
 
 
