@@ -1,42 +1,23 @@
 package domain
 
-enum class PokerType {
-    POKER, HIGH_CARD, NONE
-}
 class Hand( val cards: List<Card> ) {
-    var rank: Rank = HighCard(this)
+    private var rank: Rank = HighCard(cards)
 
     init {
         if (this.hasPoker()) {
-            rank = Poker(this)
+            rank = Quad(cards)
         }else{
-            rank = HighCard(this)
+            rank = HighCard(cards)
         }
-    }
-
-    fun getHighCard(): Card {
-        return cards.maxBy { it.weighing }!!
-    }
-
-    fun getSecondHighCard(): Card {
-        val highCard = this.getHighCard()
-        val aux = cards.toMutableList()
-        aux.remove(highCard)
-        return aux.maxBy { it.weighing }!!
-    }
-
-    fun getThirdHighCard(): Card {
-        val highCard = this.getHighCard()
-        val secondHighCard = this.getSecondHighCard()
-        val aux = cards.toMutableList()
-        aux.remove(highCard)
-        aux.remove(secondHighCard)
-        return aux.maxBy { it.weighing }!!
     }
 
     fun hasPoker(): Boolean {
         val map = cards.groupingBy { it.value }.eachCount()
         return map.values.contains(4)
+    }
+
+    operator fun compareTo(other: Hand): Int {
+        return this.rank.compareTo(other.rank)
     }
 }
 
